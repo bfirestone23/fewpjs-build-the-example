@@ -2,9 +2,42 @@
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
+const heartStates = {
+  '♡': '♥',
+  '♥': '♡'
+};
+
+const classStates = {
+  "activated-heart": "",
+  "": "activated-heart"
+};
+
+const colorStates = {
+  "red": "",
+  "": "red"
+};
+
 // Your JavaScript code goes here!
+const articleHearts = document.querySelectorAll(".like-glyph");
+for (const heart of articleHearts) {
+  addEventListener('click', fakeCallback)
+};
 
-
+function fakeCallback(e) {
+  const heart = e.target;
+  mimicServerCall('fakeUrl')
+    .then(resp => {
+      heart.innerText = heartStates[heart.innerText];
+      heart.style.color = colorStates[heart.style.color];
+      heart.className = classStates[heart.className];
+    })
+    .catch(error => {
+      const modal = document.getElementById('modal');
+      modal.className = "";
+      modal.innerText = error;
+      setTimeout(() => modal.className = "hidden", 3000);
+    });
+};
 
 
 //------------------------------------------------------------------------------
